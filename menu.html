@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Hungry Dragon Dhaba</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .menu-item { border: 2px solid red; display: inline-block; padding: 10px; cursor: pointer; }
+        #cart { margin-top: 20px; border: 1px solid #ddd; background: #f4f4f4; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Menu</h1>
+    <div class="menu-item" onclick="addToCart('Tea')">Tea</div>
+    <div class="menu-item" onclick="addToCart('Coffee')">Coffee</div>
+    <div class="menu-item" onclick="addToCart('Alcohol')">Alcohol</div>
+
+    <h2>Your Cart</h2>
+    <ul id="cartItems"></ul>
+    <a href="cart.html"><button>View Cart</button></a>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function addToCart(item) {
+            cart.push(item);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            let cartItemsDiv = document.getElementById("cartItems");
+            cartItemsDiv.innerHTML = cart.map(item => `<li>${item}</li>`).join("");
+        }
+
+        updateCartDisplay(); // Load cart on page load
+    </script>
+</body>
+</html>
