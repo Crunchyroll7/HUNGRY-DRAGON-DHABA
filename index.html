@@ -54,23 +54,66 @@
     Home
   </button>
 </a>
-      <a href="cart.html">
-  <button style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: green; color: white; border: none; cursor: pointer;">
-    Cart
-  </button>
-</a>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Hungry Dragon Dhaba</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #cartItems {
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 50%;
+            background-color: #f9f9f9;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .buy-button {
+            background-color: red;
+        }
+        .back-button {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
 
-<button id="buyButton" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: red; color: white; border: none; cursor: pointer;">
-  BUY
-</button>
+    <h1>Your Cart</h1>
+    <div id="cartItems">
+        <p>No items added yet.</p>
+    </div>
 
-<script>
-  document.getElementById("buyButton").addEventListener("click", function() {
-    let cartItems = ["Item 1", "Item 2", "Item 3"]; // Replace this with actual cart data
-    let message = `Order placed!\nItems: ${cartItems.join(", ")}\nPlease confirm with 7679643925`;
-    alert(message); // Shows the order message (you can replace this with an SMS API to send a real message)
-  });
-</script>
+    <button class="button buy-button" onclick="placeOrder()">BUY</button>
+    <button class="button back-button" onclick="goBack()">Back</button>
+
+    <script>
+        function placeOrder() {
+            let cartItems = ["Item 1", "Item 2", "Item 3"]; // Replace with actual cart data
+            let message = `Order placed!\nItems: ${cartItems.join(", ")}\nPlease confirm with 7679643925`;
+            alert(message); // Replace with an SMS API for real messaging
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
         <a href="#">Reservations</a>
         <a href="#">Contact</a>
     </nav>
