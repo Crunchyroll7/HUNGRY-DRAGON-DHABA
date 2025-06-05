@@ -5,22 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart - Hungry Dragon Dhaba</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #cartItems { margin: 20px auto; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; }
-        .button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin: 5px; }
-        .buy-button { background-color: green; color: white; }
-        .clear-button { background-color: red; color: white; }
-        .back-button { background-color: black; color: white; }
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #fff3e0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #ff4500, #ff0000);
+            color: white;
+            padding: 25px;
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        .button {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .buy-button { background-color: #4caf50; color: white; }
+        .clear-button { background-color: #ff6347; color: white; }
+        .back-button { background-color: #3498db; color: white; }
+        .button:hover { opacity: 0.8; }
+        #cartItems {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Your Cart</h1>
-    <ul id="cartItems"></ul>
-    
-    <button class="button buy-button" onclick="placeOrder()">BUY</button>
-    <button class="button clear-button" onclick="clearCart()">Clear Cart</button>
-    <a href="menu.html"><button class="button back-button">Back to Menu</button></a>
+    <header>🐉 Hungry Dragon Dhaba - Your Cart 🛒</header>
+
+    <div class="container">
+        <h2>🛍️ Your Selected Items</h2>
+        <ul id="cartItems"></ul>
+
+        <button class="button buy-button" onclick="placeOrder()">BUY</button>
+        <button class="button clear-button" onclick="clearCart()">Clear Cart</button>
+        <a href="menu.html"><button class="button back-button">Back to Menu</button></a>
+    </div>
 
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
