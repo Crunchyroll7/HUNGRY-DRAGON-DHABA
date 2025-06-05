@@ -41,42 +41,24 @@
             gap: 20px;
             padding: 20px;
         }
-        .menu-option {
+        .menu-item {
             background-color: white;
             padding: 20px;
-            width: 200px;
+            width: 250px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-            transition: 0.3s;
             text-align: center;
         }
-        .menu-option:hover {
-            transform: scale(1.05);
-        }
-        .menu-option img {
-            width: 100%;
+        .menu-item img {
+            width: 80px;
             border-radius: 8px;
         }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            width: 300px;
-        }
-        .popup img {
-            width: 60px;
-        }
-        .popup button {
-            margin: 5px;
-            padding: 8px;
+        .quantity-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -87,76 +69,63 @@
         <a href="cart.html" class="cart">🛒 View Cart</a>
     </header>
 
-    <div class="menu-container">
-        <div class="menu-option" onclick="openPopup('tea-coffee')">
-            <img src="tea-coffee.jpg" alt="Tea & Coffee">
-            <h3>Tea & Coffee</h3>
-        </div>
-        <div class="menu-option" onclick="openPopup('starter')">
-            <img src="starter.jpg" alt="Starter">
-            <h3>Starter</h3>
-        </div>
-        <div class="menu-option" onclick="openPopup('main-course')">
-            <img src="main-course.jpg" alt="Main Course">
-            <h3>Main Course</h3>
-        </div>
-        <div class="menu-option" onclick="openPopup('dessert')">
-            <img src="dessert.jpg" alt="Dessert">
-            <h3>Dessert</h3>
-        </div>
-    </div>
-
-    <div class="popup" id="popup">
-        <h2 id="popup-title"></h2>
-        <div id="popup-items"></div>
-        <button onclick="closePopup()">Close</button>
+    <div class="menu-container" id="menu">
     </div>
 
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        let items = {
+            "tea-coffee": [
+                { name: "Lemon Tea", price: 15, img: "lemon-tea.jpg" },
+                { name: "Milk Tea", price: 12, img: "milk-tea.jpg" },
+                { name: "Coffee", price: 30, img: "coffee.jpg" }
+            ],
+            "starter": [
+                { name: "Chowmein", price: 100, img: "chowmein.jpg" },
+                { name: "Momo", price: 60, img: "momo.jpg" },
+                { name: "Paneer Pakora", price: 70, img: "paneer-pakora.jpg" }
+            ],
+            "main-course": [
+                { name: "Jeera Rice", price: 100, img: "jeera-rice.jpg" },
+                { name: "Plain Rice", price: 50, img: "plain-rice.jpg" },
+                { name: "Biriyani", price: 110, img: "biriyani.jpg" }
+            ],
+            "dessert": [
+                { name: "Vanilla Ice Cream", price: 60, img: "vanilla-ice.jpg" },
+                { name: "Chocolate Ice Cream", price: 90, img: "chocolate-ice.jpg" },
+                { name: "Cornetto Ice Cream", price: 50, img: "cornetto.jpg" }
+            ]
+        };
 
-        function openPopup(category) {
-            let popupTitle = document.getElementById("popup-title");
-            let popupItems = document.getElementById("popup-items");
-            let items = {
-                "tea-coffee": [
-                    { name: "Lemon Tea", price: 15 },
-                    { name: "Milk Tea", price: 12 },
-                    { name: "Coffee", price: 30 }
-                ],
-                "starter": [
-                    { name: "Chowmein", price: 100 },
-                    { name: "Momo", price: 60 },
-                    { name: "Paneer Pakora", price: 70 }
-                ],
-                "main-course": [
-                    { name: "Jeera Rice", price: 100 },
-                    { name: "Plain Rice", price: 50 },
-                    { name: "Biriyani", price: 110 }
-                ],
-                "dessert": [
-                    { name: "Vanilla Ice Cream", price: 60 },
-                    { name: "Chocolate Ice Cream", price: 90 },
-                    { name: "Cornetto Ice Cream", price: 50 }
-                ]
-            };
-
-            popupTitle.innerText = category.replace("-", " ").toUpperCase();
-            popupItems.innerHTML = items[category].map(item =>
-                `<p>${item.name} - ₹${item.price} <button onclick="addToCart('${item.name}')">Add</button></p>`
-            ).join("");
-            document.getElementById("popup").style.display = "block";
+        function renderMenu() {
+            let menuContainer = document.getElementById("menu");
+            menuContainer.innerHTML = "";
+            for (let category in items) {
+                items[category].forEach(item => {
+                    let quantity = cart[item.name] || 0;
+                    menuContainer.innerHTML += `
+                        <div class="menu-item">
+                            <img src="${item.img}" alt="${item.name}">
+                            <h3>${item.name}</h3>
+                            <p>₹${item.price}</p>
+                            <div class="quantity-controls">
+                                <button onclick="updateCart('${item.name}', -1)">➖</button>
+                                <span>${quantity}</span>
+                                <button onclick="updateCart('${item.name}', 1)">➕</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
         }
 
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        function addToCart(item) {
-            cart[item] = (cart[item] || 0) + 1;
+        function updateCart(item, change) {
+            cart[item] = Math.max((cart[item] || 0) + change, 0);
             localStorage.setItem("cart", JSON.stringify(cart));
-            alert(`${item} added to cart!`);
+            renderMenu();
         }
+
+        renderMenu();
     </script>
 
 </body>
