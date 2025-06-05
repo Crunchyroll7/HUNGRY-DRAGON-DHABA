@@ -54,7 +54,23 @@
     Home
   </button>
 </a>
-        <a href="#">Menu</a>
+      <a href="cart.html">
+  <button style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: green; color: white; border: none; cursor: pointer;">
+    Cart
+  </button>
+</a>
+
+<button id="buyButton" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: red; color: white; border: none; cursor: pointer;">
+  BUY
+</button>
+
+<script>
+  document.getElementById("buyButton").addEventListener("click", function() {
+    let cartItems = ["Item 1", "Item 2", "Item 3"]; // Replace this with actual cart data
+    let message = `Order placed!\nItems: ${cartItems.join(", ")}\nPlease confirm with 7679643925`;
+    alert(message); // Shows the order message (you can replace this with an SMS API to send a real message)
+  });
+</script>
         <a href="#">Reservations</a>
         <a href="#">Contact</a>
     </nav>
