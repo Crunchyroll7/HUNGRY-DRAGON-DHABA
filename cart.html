@@ -7,34 +7,48 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         #cartItems { margin: 20px auto; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; }
-        .button { padding: 10px 20px; font-size: 16px; background-color: red; color: white; cursor: pointer; }
+        .button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin: 5px; }
+        .buy-button { background-color: green; color: white; }
+        .clear-button { background-color: red; color: white; }
+        .back-button { background-color: black; color: white; }
     </style>
 </head>
 <body>
 
     <h1>Your Cart</h1>
     <ul id="cartItems"></ul>
-    <button class="button" onclick="placeOrder()">BUY</button>
+    
+    <button class="button buy-button" onclick="placeOrder()">BUY</button>
+    <button class="button clear-button" onclick="clearCart()">Clear Cart</button>
+    <a href="menu.html"><button class="button back-button">Back to Menu</button></a>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
         function updateCartDisplay() {
             let cartItemsDiv = document.getElementById("cartItems");
-            cartItemsDiv.innerHTML = cart.length > 0 ? cart.map(item => `<li>${item}</li>`).join("") : "<p>No items added yet.</p>";
+            cartItemsDiv.innerHTML = Object.keys(cart).length
+                ? Object.keys(cart).map(item => `<li>${item} x${cart[item]}</li>`).join("")
+                : "<p>No items added yet.</p>";
         }
 
         function placeOrder() {
-            if (cart.length === 0) {
+            if (Object.keys(cart).length === 0) {
                 alert("Your cart is empty. Please add items before placing an order.");
                 return;
             }
 
-            let message = `Order placed!\nItems: ${cart.join(", ")}\nPlease confirm with 7679643925`;
+            let message = `Order placed!\nItems: ${Object.keys(cart).map(item => `${item} x${cart[item]}`).join(", ")}\nPlease confirm with 7679643925`;
             alert(message);
 
-            localStorage.removeItem("cart"); // Clear cart after placing order
-            cart = [];
+            localStorage.removeItem("cart"); // Clear cart after order
+            cart = {};
+            updateCartDisplay();
+        }
+
+        function clearCart() {
+            localStorage.removeItem("cart");
+            cart = {};
             updateCartDisplay();
         }
 
