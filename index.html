@@ -92,7 +92,13 @@
 </head>
 <body>
 
- <h1>Your Cart</h1>
+<h1>Menu</h1>
+<div class="menu-list">
+    <p onclick="addToCart('Tea')">1. Tea</p>
+    <p onclick="addToCart('Coffee')">2. Coffee</p>
+</div>
+
+<h1>Your Cart</h1>
 <div id="cartItems">
     <p>No items added yet.</p>
 </div>
@@ -100,7 +106,28 @@
 <button class="button buy-button" onclick="placeOrder()">BUY</button>
 
 <script>
-    let cart = ["Tea", "Coffee"]; // Replace this with actual cart data
+    let cart = []; // Initialize cart as empty
+
+    function addToCart(item) {
+        cart.push(item);
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        let cartItemsDiv = document.getElementById("cartItems");
+        cartItemsDiv.innerHTML = ""; // Clear previous cart content
+
+        if (cart.length === 0) {
+            cartItemsDiv.innerHTML = "<p>No items added yet.</p>";
+        } else {
+            let list = "<ul>";
+            cart.forEach(item => {
+                list += `<li>${item}</li>`;
+            });
+            list += "</ul>";
+            cartItemsDiv.innerHTML = list;
+        }
+    }
 
     function placeOrder() {
         if (cart.length === 0) {
@@ -109,8 +136,6 @@
         }
 
         let message = `Order placed!\nItems: ${cart.join(", ")}\nPlease confirm with 7679643925`;
-        
-        // Simulating sending a message (Replace this with an API for real messaging)
         alert(message);
     }
 </script>
