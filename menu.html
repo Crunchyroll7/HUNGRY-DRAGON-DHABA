@@ -5,38 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - Hungry Dragon Dhaba</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .menu-item { border: 2px solid red; display: inline-block; padding: 10px; cursor: pointer; margin: 5px; }
-        #cart { margin-top: 20px; border: 1px solid #ddd; background: #f4f4f4; padding: 10px; }
-        .button { padding: 10px; font-size: 16px; cursor: pointer; margin: 5px; }
-        .add-button { background-color: green; color: white; }
-        .remove-button { background-color: red; color: white; }
-        .back-button { background-color: black; color: white; }
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #fff3e0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #ff4500, #ff0000);
+            color: white;
+            padding: 25px;
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+        .menu-item {
+            background-color: white;
+            padding: 15px;
+            width: 220px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            transition: 0.3s;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+        .button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 8px;
+        }
+        .add-button { background-color: #4caf50; color: white; }
+        .remove-button { background-color: #ff6347; color: white; }
+        .back-button { background-color: #3498db; color: white; }
     </style>
 </head>
 <body>
 
-    <h1>Menu</h1>
-    <div class="menu-item">
-        <p>Tea</p>
-        <button class="button add-button" onclick="addToCart('Tea')">Add</button>
-        <button class="button remove-button" onclick="removeFromCart('Tea')">Remove</button>
-    </div>
-    <div class="menu-item">
-        <p>Coffee</p>
-        <button class="button add-button" onclick="addToCart('Coffee')">Add</button>
-        <button class="button remove-button" onclick="removeFromCart('Coffee')">Remove</button>
-    </div>
-    <div class="menu-item">
-        <p>Alcohol</p>
-        <button class="button add-button" onclick="addToCart('Alcohol')">Add</button>
-        <button class="button remove-button" onclick="removeFromCart('Alcohol')">Remove</button>
+    <header>🐉 Hungry Dragon Dhaba - Menu 🐉</header>
+
+    <div class="menu-container">
+        <div class="menu-item">
+            <h3>Tea</h3>
+            <p>A refreshing and soothing drink.</p>
+            <button class="button add-button" onclick="addToCart('Tea')">Add</button>
+            <button class="button remove-button" onclick="removeFromCart('Tea')">Remove</button>
+        </div>
+
+        <div class="menu-item">
+            <h3>Coffee</h3>
+            <p>Strong and energizing brew to boost your day.</p>
+            <button class="button add-button" onclick="addToCart('Coffee')">Add</button>
+            <button class="button remove-button" onclick="removeFromCart('Coffee')">Remove</button>
+        </div>
+
+        <div class="menu-item">
+            <h3>Alcohol</h3>
+            <p>A selection of premium spirits for your enjoyment.</p>
+            <button class="button add-button" onclick="addToCart('Alcohol')">Add</button>
+            <button class="button remove-button" onclick="removeFromCart('Alcohol')">Remove</button>
+        </div>
     </div>
 
     <h2>Your Cart</h2>
     <ul id="cartItems"></ul>
     <a href="cart.html"><button class="button">View Cart</button></a>
-    <a href="index.html"><button class="button back-button">Back</button></a>
+    <a href="index.html"><button class="button back-button">Back to Home</button></a>
 
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
@@ -50,7 +98,7 @@
         function removeFromCart(item) {
             if (cart[item]) {
                 cart[item]--;
-                if (cart[item] === 0) delete cart[item]; // Remove item if count reaches 0
+                if (cart[item] === 0) delete cart[item];
                 localStorage.setItem("cart", JSON.stringify(cart));
             }
             updateCartDisplay();
