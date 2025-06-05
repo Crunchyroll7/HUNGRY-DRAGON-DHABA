@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Hungry Dragon Dhaba</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #cartItems { margin: 20px auto; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; }
+        .button { padding: 10px 20px; font-size: 16px; background-color: red; color: white; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Your Cart</h1>
+    <ul id="cartItems"></ul>
+    <button class="button" onclick="placeOrder()">BUY</button>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function updateCartDisplay() {
+            let cartItemsDiv = document.getElementById("cartItems");
+            cartItemsDiv.innerHTML = cart.length > 0 ? cart.map(item => `<li>${item}</li>`).join("") : "<p>No items added yet.</p>";
+        }
+
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items before placing an order.");
+                return;
+            }
+
+            let message = `Order placed!\nItems: ${cart.join(", ")}\nPlease confirm with 7679643925`;
+            alert(message);
+
+            localStorage.removeItem("cart"); // Clear cart after placing order
+            cart = [];
+            updateCartDisplay();
+        }
+
+        updateCartDisplay();
+    </script>
+
+</body>
+</html>
