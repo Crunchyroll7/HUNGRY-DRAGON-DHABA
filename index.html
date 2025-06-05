@@ -154,7 +154,7 @@
 </head>
 <body>
 
-  <div class="menu-item" onclick="toggleMenu()">
+<div class="menu-item" onclick="toggleMenu()">
     <h3>Dish Name 1</h3>
     <p>Click to view menu items</p>
 </div>
@@ -170,16 +170,44 @@
 </div>
 
 <script>
+    let cart = {}; // Object to store cart items and their quantities
+
     function toggleMenu() {
         var menu = document.getElementById("menuList");
         menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
     }
 
     function addToCart(item) {
-        var cart = document.getElementById("cartItems");
-        var listItem = document.createElement("li");
-        listItem.textContent = item;
-        cart.appendChild(listItem);
+        // Increase quantity if item exists, otherwise add it
+        if (cart[item]) {
+            cart[item]++;
+        } else {
+            cart[item] = 1;
+        }
+        updateCartDisplay();
+    }
+
+    function removeFromCart(item) {
+        if (cart[item]) {
+            cart[item]--;
+            if (cart[item] === 0) {
+                delete cart[item]; // Remove item if quantity reaches zero
+            }
+        }
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        let cartItemsList = document.getElementById("cartItems");
+        cartItemsList.innerHTML = ""; // Clear previous items
+
+        for (let item in cart) {
+            let listItem = document.createElement("li");
+            listItem.innerHTML = `${item} x${cart[item]} 
+                <button onclick="addToCart('${item}')">➕</button>
+                <button onclick="removeFromCart('${item}')">➖</button>`;
+            cartItemsList.appendChild(listItem);
+        }
     }
 </script>
 </body>
