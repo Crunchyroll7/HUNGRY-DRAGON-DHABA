@@ -3,215 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Restaurant</title>
+    <title>Hungry Dragon Dhaba</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            color: black;
-        }
-        header {
-            background-color: red;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 30px;
-            font-weight: bold;
-        }
-        nav {
-            text-align: center;
-            padding: 15px;
-            background-color: white;
-        }
-        nav a {
-            text-decoration: none;
-            color: red;
-            margin: 0 15px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .container {
-            text-align: center;
-            margin: 50px auto;
-        }
-        .menu-item {
-            display: inline-block;
-            margin: 20px;
-            padding: 20px;
-            border: 2px solid red;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; }
+        header { background-color: red; color: white; padding: 20px; font-size: 30px; }
+        nav a { text-decoration: none; font-size: 18px; font-weight: bold; margin: 15px; }
+        .button { padding: 10px; font-size: 18px; background-color: red; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
-
-<header>HUNGRY DRAGON DHABA</header>
-
+    <header>HUNGRY DRAGON DHABA</header>
     <nav>
-        <a href="https://crunchyroll7.github.io/HUNGRY-DRAGON-DHABA/" target="_blank">
-  <button style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: red; color: white; border: none; cursor: pointer;">
-    Home
-  </button>
-</a>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - Hungry Dragon Dhaba</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        #cartItems {
-            margin: 20px auto;
-            padding: 10px;
-            border: 1px solid #ddd;
-            width: 50%;
-            background-color: #f9f9f9;
-        }
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin: 10px;
-        }
-        .buy-button {
-            background-color: red;
-        }
-        .back-button {
-            background-color: green;
-        }
-    </style>
-</head>
-<body>
-
-<button class="button buy-button" onclick="placeOrder()">BUY</button>
-<button class="button back-button" onclick="goBack()">Back</button>
-
-<script>
-    function placeOrder() {
-        let cartItems = ["Item 1", "Item 2", "Item 3"]; // Replace with actual cart data
-        let message = `Order placed!\nItems: ${cartItems.join(", ")}\nPlease confirm with 7679643925`;
-        alert(message); // Replace with an SMS API for real messaging
-    }
-
-    function goBack() {
-        window.history.back();
-    }
-</script>
-</body>
-</html>
-        <a href="#">Reservations</a>
-        <a href="#">Contact</a>
+        <a href="menu.html"><button class="button">Menu</button></a>
+        <a href="cart.html"><button class="button">Cart</button></a>
     </nav>
-
-    <div class="container">
-        <h2>Delicious Food, Great Atmosphere</h2>
-        <p>Come and enjoy the best dishes prepared with love!</p>
+    <div>
+        <h2>Welcome to Hungry Dragon Dhaba!</h2>
+        <p>Enjoy delicious food prepared with love.</p>
     </div>
-
-    <div class="container">
-        <h2>Featured Menu</h2>
-       <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Button</title>
-    <style>
-        .menu-item {
-            background-color: #f4f4f4;
-            padding: 10px;
-            width: 200px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .menu-list {
-            display: none;
-            margin-top: 10px;
-            background-color: #fff;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="menu-item" onclick="toggleMenu()">
-    <h3>Dish Name 1</h3>
-    <p>Click to view menu items</p>
-</div>
-
-<div class="menu-list" id="menuList">
-    <p onclick="addToCart('Tea')">1. Tea</p>
-    <p onclick="addToCart('Coffee')">2. Coffee</p>
-    <p onclick="addToCart('Coffee')">3. Alkohol</p>
-</div>
-
-<div id="cart">
-    <h3>Your Cart</h3>
-    <ul id="cartItems"></ul>
-</div>
-
-<script>
-    let cart = {}; // Object to store cart items and their quantities
-
-    function toggleMenu() {
-        var menu = document.getElementById("menuList");
-        menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
-    }
-
-    function addToCart(item) {
-        // Increase quantity if item exists, otherwise add it
-        if (cart[item]) {
-            cart[item]++;
-        } else {
-            cart[item] = 1;
-        }
-        updateCartDisplay();
-    }
-
-    function removeFromCart(item) {
-        if (cart[item]) {
-            cart[item]--;
-            if (cart[item] === 0) {
-                delete cart[item]; // Remove item if quantity reaches zero
-            }
-        }
-        updateCartDisplay();
-    }
-
-    function updateCartDisplay() {
-        let cartItemsList = document.getElementById("cartItems");
-        cartItemsList.innerHTML = ""; // Clear previous items
-
-        for (let item in cart) {
-            let listItem = document.createElement("li");
-            listItem.innerHTML = `${item} x${cart[item]} 
-                <button onclick="addToCart('${item}')">➕</button>
-                <button onclick="removeFromCart('${item}')">➖</button>`;
-            cartItemsList.appendChild(listItem);
-        }
-    }
-</script>
-</body>
-</html>
-        <div class="menu-item">
-            <h3>Dish Name 2</h3>
-            <p>A delicious description of another dish.</p>
-        </div>
-    </div>
-
 </body>
 </html>
