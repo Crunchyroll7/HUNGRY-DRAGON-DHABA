@@ -62,10 +62,54 @@
 
     <div class="container">
         <h2>Featured Menu</h2>
-        <div class="menu-item">
-            <h3>Dish Name 1</h3>
-            <p>A tasty description of the dish.</p>
-        </div>
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Button</title>
+    <style>
+        .menu-item {
+            background-color: #f4f4f4;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .menu-list {
+            display: none;
+            margin-top: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-item" onclick="toggleMenu()">
+        <h3>Dish Name 1</h3>
+        <p>Click to view menu items</p>
+    </div>
+
+    <div class="menu-list" id="menuList">
+        <p>1. Tea</p>
+        <p>2. Coffee</p>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menuList");
+            menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
+        }
+    </script>
+
+</body>
+</html>
         <div class="menu-item">
             <h3>Dish Name 2</h3>
             <p>A delicious description of another dish.</p>
