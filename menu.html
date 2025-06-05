@@ -20,98 +20,143 @@
             font-size: 36px;
             font-weight: bold;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart {
+            font-size: 18px;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px;
         }
         .menu-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             padding: 20px;
         }
-        .menu-item {
+        .menu-option {
             background-color: white;
-            padding: 15px;
-            width: 220px;
+            padding: 20px;
+            width: 200px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
-        .menu-item:hover {
+        .menu-option:hover {
             transform: scale(1.05);
         }
-        .button {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
+        .menu-option img {
             width: 100%;
-            margin-top: 8px;
+            border-radius: 8px;
         }
-        .add-button { background-color: #4caf50; color: white; }
-        .remove-button { background-color: #ff6347; color: white; }
-        .back-button { background-color: #3498db; color: white; }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 300px;
+        }
+        .popup img {
+            width: 60px;
+        }
+        .popup button {
+            margin: 5px;
+            padding: 8px;
+        }
     </style>
 </head>
 <body>
 
-    <header>🐉 Hungry Dragon Dhaba - Menu 🐉</header>
+    <header>
+        🐉 Hungry Dragon Dhaba - Menu 🐉
+        <a href="cart.html" class="cart">🛒 View Cart</a>
+    </header>
 
     <div class="menu-container">
-        <div class="menu-item">
-            <h3>Tea</h3>
-            <p>A refreshing and soothing drink.</p>
-            <button class="button add-button" onclick="addToCart('Tea')">Add</button>
-            <button class="button remove-button" onclick="removeFromCart('Tea')">Remove</button>
+        <div class="menu-option" onclick="openPopup('tea-coffee')">
+            <img src="tea-coffee.jpg" alt="Tea & Coffee">
+            <h3>Tea & Coffee</h3>
         </div>
-
-        <div class="menu-item">
-            <h3>Coffee</h3>
-            <p>Strong and energizing brew to boost your day.</p>
-            <button class="button add-button" onclick="addToCart('Coffee')">Add</button>
-            <button class="button remove-button" onclick="removeFromCart('Coffee')">Remove</button>
+        <div class="menu-option" onclick="openPopup('starter')">
+            <img src="starter.jpg" alt="Starter">
+            <h3>Starter</h3>
         </div>
-
-        <div class="menu-item">
-            <h3>Alcohol</h3>
-            <p>A selection of premium spirits for your enjoyment.</p>
-            <button class="button add-button" onclick="addToCart('Alcohol')">Add</button>
-            <button class="button remove-button" onclick="removeFromCart('Alcohol')">Remove</button>
+        <div class="menu-option" onclick="openPopup('main-course')">
+            <img src="main-course.jpg" alt="Main Course">
+            <h3>Main Course</h3>
+        </div>
+        <div class="menu-option" onclick="openPopup('dessert')">
+            <img src="dessert.jpg" alt="Dessert">
+            <h3>Dessert</h3>
         </div>
     </div>
 
-    <h2>Your Cart</h2>
-    <ul id="cartItems"></ul>
-    <a href="cart.html"><button class="button">View Cart</button></a>
-    <a href="index.html"><button class="button back-button">Back to Home</button></a>
+    <div class="popup" id="popup">
+        <h2 id="popup-title"></h2>
+        <div id="popup-items"></div>
+        <button onclick="closePopup()">Close</button>
+    </div>
 
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
+        function openPopup(category) {
+            let popupTitle = document.getElementById("popup-title");
+            let popupItems = document.getElementById("popup-items");
+            let items = {
+                "tea-coffee": [
+                    { name: "Lemon Tea", price: 15 },
+                    { name: "Milk Tea", price: 12 },
+                    { name: "Coffee", price: 30 }
+                ],
+                "starter": [
+                    { name: "Chowmein", price: 100 },
+                    { name: "Momo", price: 60 },
+                    { name: "Paneer Pakora", price: 70 }
+                ],
+                "main-course": [
+                    { name: "Jeera Rice", price: 100 },
+                    { name: "Plain Rice", price: 50 },
+                    { name: "Biriyani", price: 110 }
+                ],
+                "dessert": [
+                    { name: "Vanilla Ice Cream", price: 60 },
+                    { name: "Chocolate Ice Cream", price: 90 },
+                    { name: "Cornetto Ice Cream", price: 50 }
+                ]
+            };
+
+            popupTitle.innerText = category.replace("-", " ").toUpperCase();
+            popupItems.innerHTML = items[category].map(item =>
+                `<p>${item.name} - ₹${item.price} <button onclick="addToCart('${item.name}')">Add</button></p>`
+            ).join("");
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
         function addToCart(item) {
             cart[item] = (cart[item] || 0) + 1;
             localStorage.setItem("cart", JSON.stringify(cart));
-            updateCartDisplay();
+            alert(`${item} added to cart!`);
         }
-
-        function removeFromCart(item) {
-            if (cart[item]) {
-                cart[item]--;
-                if (cart[item] === 0) delete cart[item];
-                localStorage.setItem("cart", JSON.stringify(cart));
-            }
-            updateCartDisplay();
-        }
-
-        function updateCartDisplay() {
-            let cartItemsDiv = document.getElementById("cartItems");
-            cartItemsDiv.innerHTML = Object.keys(cart).length 
-                ? Object.keys(cart).map(item => `<li>${item} x${cart[item]}</li>`).join("")
-                : "<p>No items added yet.</p>";
-        }
-
-        updateCartDisplay();
     </script>
 
 </body>
