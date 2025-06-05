@@ -92,51 +92,18 @@
 </head>
 <body>
 
-<h1>Menu</h1>
-<div class="menu-list">
-    <p onclick="addToCart('Tea')">1. Tea</p>
-    <p onclick="addToCart('Coffee')">2. Coffee</p>
-</div>
-
-<h1>Your Cart</h1>
-<div id="cartItems">
-    <p>No items added yet.</p>
-</div>
-
 <button class="button buy-button" onclick="placeOrder()">BUY</button>
+<button class="button back-button" onclick="goBack()">Back</button>
 
 <script>
-    let cart = []; // Initialize cart as empty
-
-    function addToCart(item) {
-        cart.push(item);
-        updateCartDisplay();
-    }
-
-    function updateCartDisplay() {
-        let cartItemsDiv = document.getElementById("cartItems");
-        cartItemsDiv.innerHTML = ""; // Clear previous cart content
-
-        if (cart.length === 0) {
-            cartItemsDiv.innerHTML = "<p>No items added yet.</p>";
-        } else {
-            let list = "<ul>";
-            cart.forEach(item => {
-                list += `<li>${item}</li>`;
-            });
-            list += "</ul>";
-            cartItemsDiv.innerHTML = list;
-        }
-    }
-
     function placeOrder() {
-        if (cart.length === 0) {
-            alert("Your cart is empty. Please add items before placing an order.");
-            return;
-        }
+        let cartItems = ["Item 1", "Item 2", "Item 3"]; // Replace with actual cart data
+        let message = `Order placed!\nItems: ${cartItems.join(", ")}\nPlease confirm with 7679643925`;
+        alert(message); // Replace with an SMS API for real messaging
+    }
 
-        let message = `Order placed!\nItems: ${cart.join(", ")}\nPlease confirm with 7679643925`;
-        alert(message);
+    function goBack() {
+        window.history.back();
     }
 </script>
 </body>
