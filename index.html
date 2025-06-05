@@ -5,21 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hungry Dragon Dhaba</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        header { background-color: red; color: white; padding: 20px; font-size: 30px; }
-        nav a { text-decoration: none; font-size: 18px; font-weight: bold; margin: 15px; }
-        .button { padding: 10px; font-size: 18px; background-color: red; color: white; cursor: pointer; }
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #fff3e0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #ff4500, #ff0000);
+            color: white;
+            padding: 25px;
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .button {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .menu-button { background-color: #ff6347; color: white; }
+        .cart-button { background-color: #4caf50; color: white; }
+        .contact-button { background-color: #3498db; color: white; }
+        .button:hover { opacity: 0.8; }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+        }
+        #contactInfo {
+            display: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ff4500;
+        }
     </style>
 </head>
 <body>
-    <header>HUNGRY DRAGON DHABA</header>
+
+    <header>🐉 HUNGRY DRAGON DHABA 🐉</header>
+
     <nav>
-        <a href="menu.html"><button class="button">Menu</button></a>
-        <a href="cart.html"><button class="button">Cart</button></a>
+        <a href="menu.html"><button class="button menu-button">Menu</button></a>
+        <a href="cart.html"><button class="button cart-button">Cart</button></a>
+        <button class="button contact-button" onclick="showContact()">Contact</button>
     </nav>
-    <div>
-        <h2>Welcome to Hungry Dragon Dhaba!</h2>
-        <p>Enjoy delicious food prepared with love.</p>
+
+    <div class="container">
+        <h2>🔥 Delicious Food, Great Atmosphere 🔥</h2>
+        <p>Savor the taste of perfectly cooked dishes made with love!</p>
     </div>
+
+    <div id="contactInfo">📞 Contact: 7679643925</div>
+
+    <script>
+        function showContact() {
+            document.getElementById("contactInfo").style.display = "block";
+        }
+    </script>
+
 </body>
 </html>
