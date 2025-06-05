@@ -126,7 +126,8 @@
             let message = `Hello, my name is ${userName}. I want to order:\n${Object.keys(cart).map(item => `${item} x${cart[item]}`).join("\n")}\nOption: ${option}`;
             let whatsappURL = `https://wa.me/7679643925?text=${encodeURIComponent(message)}`;
 
-            window.location.href = whatsappURL; 
+            window.location.href = whatsappURL; // Redirect to WhatsApp
+ 
         }
 
         function clearCart() {
