@@ -97,6 +97,14 @@
             ]
         };
 
+        <div id="uploadPanel" style="display: none; position: fixed; bottom: 50px; right: 20px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);">
+    <h3>Add New Item</h3>
+    <input type="text" id="itemName" placeholder="Item Name"><br>
+    <input type="number" id="itemPrice" placeholder="Price"><br>
+    <input type="file" id="itemImage"><br>
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="closePanel()">Close</button>
+</div>
         function renderMenu() {
             let menuContainer = document.getElementById("menu");
             menuContainer.innerHTML = "";
@@ -127,6 +135,17 @@
 
         renderMenu();
     </script>
+<button id="uploadButton" style="position: fixed; bottom: 20px; right: 20px; background-color: #ff4500; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+    Upload
+</button>
 
+    <div id="uploadPanel" style="display: none; position: fixed; bottom: 50px; right: 20px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);">
+    <h3>Add New Item</h3>
+    <input type="text" id="itemName" placeholder="Item Name"><br>
+    <input type="number" id="itemPrice" placeholder="Price"><br>
+    <input type="file" id="itemImage"><br>
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="closePanel()">Close</button>
+</div>
 </body>
 </html>
