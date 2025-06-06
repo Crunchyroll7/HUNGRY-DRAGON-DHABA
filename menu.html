@@ -60,6 +60,27 @@
             gap: 10px;
             margin-top: 10px;
         }
+        #uploadButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff4500;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        #uploadPanel {
+            display: none;
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -69,12 +90,24 @@
         <a href="cart.html" class="cart">🛒 View Cart</a>
     </header>
 
-    <div class="menu-container" id="menu">
+    <div class="menu-container" id="menu"></div>
+
+    <!-- Upload Button -->
+    <button id="uploadButton">Upload</button>
+
+    <!-- Upload Panel -->
+    <div id="uploadPanel">
+        <h3>Add New Item</h3>
+        <input type="text" id="itemName" placeholder="Item Name"><br>
+        <input type="number" id="itemPrice" placeholder="Price"><br>
+        <input type="file" id="itemImage"><br>
+        <button onclick="addItem()">Add Item</button>
+        <button onclick="closePanel()">Close</button>
     </div>
 
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
-        let items = {
+        let items = JSON.parse(localStorage.getItem("items")) || {
             "tea-coffee": [
                 { name: "Lemon Tea", price: 15, img: "lemon-tea.jpg" },
                 { name: "Milk Tea", price: 12, img: "milk-tea.jpg" },
@@ -97,14 +130,6 @@
             ]
         };
 
-        <div id="uploadPanel" style="display: none; position: fixed; bottom: 50px; right: 20px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);">
-    <h3>Add New Item</h3>
-    <input type="text" id="itemName" placeholder="Item Name"><br>
-    <input type="number" id="itemPrice" placeholder="Price"><br>
-    <input type="file" id="itemImage"><br>
-    <button onclick="addItem()">Add Item</button>
-    <button onclick="closePanel()">Close</button>
-</div>
         function renderMenu() {
             let menuContainer = document.getElementById("menu");
             menuContainer.innerHTML = "";
@@ -133,19 +158,35 @@
             renderMenu();
         }
 
+        document.getElementById("uploadButton").addEventListener("click", () => {
+            document.getElementById("uploadPanel").style.display = "block";
+        });
+
+        function closePanel() {
+            document.getElementById("uploadPanel").style.display = "none";
+        }
+
+        function addItem() {
+            let name = document.getElementById("itemName").value;
+            let price = document.getElementById("itemPrice").value;
+            let imageFile = document.getElementById("itemImage").files[0];
+
+            if (name && price && imageFile) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    let newItem = { name, price: parseInt(price), img: event.target.result };
+                    items["custom"] = items["custom"] || [];
+                    items["custom"].push(newItem);
+                    localStorage.setItem("items", JSON.stringify(items));
+                    renderMenu();
+                    closePanel();
+                };
+                reader.readAsDataURL(imageFile);
+            }
+        }
+
         renderMenu();
     </script>
-<button id="uploadButton" style="position: fixed; bottom: 20px; right: 20px; background-color: #ff4500; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-    Upload
-</button>
 
-    <div id="uploadPanel" style="display: none; position: fixed; bottom: 50px; right: 20px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);">
-    <h3>Add New Item</h3>
-    <input type="text" id="itemName" placeholder="Item Name"><br>
-    <input type="number" id="itemPrice" placeholder="Price"><br>
-    <input type="file" id="itemImage"><br>
-    <button onclick="addItem()">Add Item</button>
-    <button onclick="closePanel()">Close</button>
-</div>
 </body>
 </html>
