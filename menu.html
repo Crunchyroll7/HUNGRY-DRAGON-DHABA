@@ -1,208 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Hungry Dragon Dhaba</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #fff3e0;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(90deg, #ff4500, #ff0000);
-            color: white;
-            padding: 25px;
-            font-size: 36px;
-            font-weight: bold;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cart {
-            font-size: 18px;
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            margin-right: 20px;
-        }
-        .menu-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
-        .menu-item {
-            position: relative;
-            background-color: white;
-            padding: 20px;
-            width: 250px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-            text-align: center;
-        }
-        .menu-item img {
-            width: 80px;
-            border-radius: 8px;
-        }
-        .quantity-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .dots-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .menu-dropdown {
-            display: none;
-            position: absolute;
-            top: 30px;
-            right: 10px;
-            background: white;
-            border: 1px solid #ccc;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
-        }
-        .menu-dropdown button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: red;
-            padding: 5px;
-        }
-        #uploadButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ff4500;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            border: none;
-        }
-        #uploadPanel {
-            display: none;
-            position: fixed;
-            bottom: 50px;
-            right: 20px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu - Hungry Dragon Dhaba</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #fff3e0;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #ff4500, #ff0000);
+      color: white;
+      padding: 25px;
+      font-size: 36px;
+      font-weight: bold;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart {
+      font-size: 18px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .menu-item {
+      position: relative;
+      background-color: white;
+      padding: 20px;
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+    .menu-item img {
+      width: 80px;
+      border-radius: 8px;
+    }
+    .quantity-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .dots-menu {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 5px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    }
+    .menu-dropdown button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: red;
+      padding: 5px;
+    }
+    #uploadButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff4500;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+    }
+    #uploadPanel {
+      display: none;
+      position: fixed;
+      bottom: 50px;
+      right: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  </style>
 </head>
 <body>
+  <header>
+    🐉 Hungry Dragon Dhaba - Menu 🐉
+    <a href="cart.html" class="cart">🛒 View Cart</a>
+  </header>
 
-    <header>
-        🐉 Hungry Dragon Dhaba - Menu 🐉
-        <a href="cart.html" class="cart">🛒 View Cart</a>
-    </header>
+  <div class="menu-container" id="menu"></div>
 
-    <div class="menu-container" id="menu"></div>
+  <!-- Upload Button -->
+  <button id="uploadButton">Upload</button>
 
-    <!-- Upload Button -->
-    <button id="uploadButton">Upload</button>
+  <!-- Upload Panel -->
+  <div id="uploadPanel">
+    <h3>Add New Item</h3>
+    <input type="text" id="itemName" placeholder="Item Name"><br>
+    <input type="number" id="itemPrice" placeholder="Price"><br>
+    <input type="file" id="itemImage"><br>
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="closePanel()">Close</button>
+  </div>
 
-    <!-- Upload Panel -->
-    <div id="uploadPanel">
-        <h3>Add New Item</h3>
-        <input type="text" id="itemName" placeholder="Item Name"><br>
-        <input type="number" id="itemPrice" placeholder="Price"><br>
-        <input type="file" id="itemImage"><br>
-        <button onclick="addItem()">Add Item</button>
-        <button onclick="closePanel()">Close</button>
-    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let cart = JSON.parse(localStorage.getItem("cart")) || {};
+      let items = JSON.parse(localStorage.getItem("items")) || {
+        "tea-coffee": [
+          { name: "Lemon Tea", price: 15, img: "lemon-tea.jpg" },
+          { name: "Milk Tea", price: 12, img: "milk-tea.jpg" },
+          { name: "Coffee", price: 30, img: "coffee.jpg" }
+        ],
+        "starter": [
+          { name: "Chowmein", price: 100, img: "chowmein.jpg" },
+          { name: "Momo", price: 60, img: "momo.jpg" },
+          { name: "Paneer Pakora", price: 70, img: "paneer-pakora.jpg" }
+        ],
+        "main-course": [
+          { name: "Jeera Rice", price: 100, img: "jeera-rice.jpg" },
+          { name: "Plain Rice", price: 50, img: "plain-rice.jpg" },
+          { name: "Biriyani", price: 110, img: "biriyani.jpg" }
+        ],
+        "dessert": [
+          { name: "Vanilla Ice Cream", price: 60, img: "vanilla-ice.jpg" },
+          { name: "Chocolate Ice Cream", price: 90, img: "chocolate-ice.jpg" },
+          { name: "Cornetto Ice Cream", price: 50, img: "cornetto.jpg" }
+        ]
+      };
 
-    <script>
-        let cart = JSON.parse(localStorage.getItem("cart")) || {};
-        let items = JSON.parse(localStorage.getItem("items")) || {
-            "tea-coffee": [
-                { name: "Lemon Tea", price: 15, img: "lemon-tea.jpg" },
-                { name: "Milk Tea", price: 12, img: "milk-tea.jpg" },
-                { name: "Coffee", price: 30, img: "coffee.jpg" }
-            ],
-            "starter": [
-                { name: "Chowmein", price: 100, img: "chowmein.jpg" },
-                { name: "Momo", price: 60, img: "momo.jpg" },
-                { name: "Paneer Pakora", price: 70, img: "paneer-pakora.jpg" }
-            ],
-            "main-course": [
-                { name: "Jeera Rice", price: 100, img: "jeera-rice.jpg" },
-                { name: "Plain Rice", price: 50, img: "plain-rice.jpg" },
-                { name: "Biriyani", price: 110, img: "biriyani.jpg" }
-            ],
-            "dessert": [
-                { name: "Vanilla Ice Cream", price: 60, img: "vanilla-ice.jpg" },
-                { name: "Chocolate Ice Cream", price: 90, img: "chocolate-ice.jpg" },
-                { name: "Cornetto Ice Cream", price: 50, img: "cornetto.jpg" }
-            ]
-        };
-
-        function renderMenu() {
-            let menuContainer = document.getElementById("menu");
-            menuContainer.innerHTML = "";
-            for (let category in items) {
-                items[category].forEach(item => {
-                    let quantity = cart[item.name] || 0;
-                    menuContainer.innerHTML += `
-                        <div class="menu-item">
-                            <span class="dots-menu" onclick="toggleDropdown('${item.name}')">⋮</span>
-                            <div class="menu-dropdown" id="dropdown-${item.name}">
-                                <button onclick="removeItem('${item.name}')">Remove</button>
-                            </div>
-                            <img src="${item.img}" alt="${item.name}">
-                            <h3>${item.name}</h3>
-                            <p>₹${item.price}</p>
-                            <div class="quantity-controls">
-                                <button onclick="updateCart('${item.name}', -1)">➖</button>
-                                <span>${quantity}</span>
-                                <button onclick="updateCart('${item.name}', 1)">➕</button>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
+      function renderMenu() {
+        let menuContainer = document.getElementById("menu");
+        menuContainer.innerHTML = "";
+        for (let category in items) {
+          items[category].forEach(item => {
+            let quantity = cart[item.name] || 0;
+            menuContainer.innerHTML += `
+              <div class="menu-item">
+                <span class="dots-menu" onclick="toggleDropdown('${item.name}')">⋮</span>
+                <div class="menu-dropdown" id="dropdown-${item.name}">
+                  <button onclick="removeItem('${item.name}')">Remove</button>
+                </div>
+                <img src="${item.img}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>₹${item.price}</p>
+                <div class="quantity-controls">
+                  <button onclick="updateCart('${item.name}', -1)">➖</button>
+                  <span>${quantity}</span>
+                  <button onclick="updateCart('${item.name}', 1)">➕</button>
+                </div>
+              </div>
+            `;
+          });
         }
+      }
 
-        function updateCart(item, change) {
-            cart[item] = Math.max((cart[item] || 0) + change, 0);
-            localStorage.setItem("cart", JSON.stringify(cart));
-            renderMenu();
+      function updateCart(item, change) {
+        cart[item] = Math.max((cart[item] || 0) + change, 0);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderMenu();
+      }
+      
+      window.toggleDropdown = function(item) {
+        let dropdown = document.getElementById(`dropdown-${item}`);
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      };
+
+      window.removeItem = function(item) {
+        for (let category in items) {
+          items[category] = items[category].filter(i => i.name !== item);
         }
+        localStorage.setItem("items", JSON.stringify(items));
+        renderMenu();
+      };
 
-        function toggleDropdown(item) {
-            let dropdown = document.getElementById(`dropdown-${item}`);
-            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-        }
+      // Upload Panel Event Listeners
+      document.getElementById("uploadButton").addEventListener("click", () => {
+        document.getElementById("uploadPanel").style.display = "block";
+      });
 
-        function removeItem(item) {
-            for (let category in items) {
-                items[category] = items[category].filter(i => i.name !== item);
-            }
+      window.closePanel = function () {
+        document.getElementById("uploadPanel").style.display = "none";
+      };
+
+      window.addItem = function () {
+        let name = document.getElementById("itemName").value;
+        let price = document.getElementById("itemPrice").value;
+        let imageFile = document.getElementById("itemImage").files[0];
+
+        if (name && price && imageFile) {
+          let reader = new FileReader();
+          reader.onload = function (event) {
+            let newItem = { name, price: parseInt(price), img: event.target.result };
+            items["custom"] = items["custom"] || [];
+            items["custom"].push(newItem);
             localStorage.setItem("items", JSON.stringify(items));
             renderMenu();
+            closePanel();
+          };
+          reader.readAsDataURL(imageFile);
         }
+      };
 
-        renderMenu();
-    </script>
-
+      renderMenu();
+    });
+  </script>
 </body>
 </html>
