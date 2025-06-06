@@ -42,6 +42,7 @@
             padding: 20px;
         }
         .menu-item {
+            position: relative;
             background-color: white;
             padding: 20px;
             width: 250px;
@@ -59,6 +60,31 @@
             align-items: center;
             gap: 10px;
             margin-top: 10px;
+        }
+        .dots-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+        }
+        .menu-dropdown button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: red;
+            padding: 5px;
         }
         #uploadButton {
             position: fixed;
@@ -138,6 +164,10 @@
                     let quantity = cart[item.name] || 0;
                     menuContainer.innerHTML += `
                         <div class="menu-item">
+                            <span class="dots-menu" onclick="toggleDropdown('${item.name}')">⋮</span>
+                            <div class="menu-dropdown" id="dropdown-${item.name}">
+                                <button onclick="removeItem('${item.name}')">Remove</button>
+                            </div>
                             <img src="${item.img}" alt="${item.name}">
                             <h3>${item.name}</h3>
                             <p>₹${item.price}</p>
@@ -158,31 +188,17 @@
             renderMenu();
         }
 
-        document.getElementById("uploadButton").addEventListener("click", () => {
-            document.getElementById("uploadPanel").style.display = "block";
-        });
-
-        function closePanel() {
-            document.getElementById("uploadPanel").style.display = "none";
+        function toggleDropdown(item) {
+            let dropdown = document.getElementById(`dropdown-${item}`);
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
         }
 
-        function addItem() {
-            let name = document.getElementById("itemName").value;
-            let price = document.getElementById("itemPrice").value;
-            let imageFile = document.getElementById("itemImage").files[0];
-
-            if (name && price && imageFile) {
-                let reader = new FileReader();
-                reader.onload = function (event) {
-                    let newItem = { name, price: parseInt(price), img: event.target.result };
-                    items["custom"] = items["custom"] || [];
-                    items["custom"].push(newItem);
-                    localStorage.setItem("items", JSON.stringify(items));
-                    renderMenu();
-                    closePanel();
-                };
-                reader.readAsDataURL(imageFile);
+        function removeItem(item) {
+            for (let category in items) {
+                items[category] = items[category].filter(i => i.name !== item);
             }
+            localStorage.setItem("items", JSON.stringify(items));
+            renderMenu();
         }
 
         renderMenu();
