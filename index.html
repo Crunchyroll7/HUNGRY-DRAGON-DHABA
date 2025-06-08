@@ -82,3 +82,30 @@
 
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Headline</title>
+    <style>
+        @keyframes move {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .headline {
+            white-space: nowrap;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            animation: move 5s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="headline">This is a moving headline!</div>
+</body>
+</html>
