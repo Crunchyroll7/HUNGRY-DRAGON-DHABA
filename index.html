@@ -91,19 +91,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moving Headline</title>
     <style>
+        body {
+            background-color: red; /* Set the background color */
+            overflow: hidden;
+        }
+
         @keyframes move {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         
         .headline {
             white-space: nowrap;
-            font-size: 36px;
+            font-size: 24px;
             font-weight: bold;
             position: absolute;
+            color: white;
             animation: move 5s linear infinite;
-             background-color: #fff3e0;
-            color: #333;
         }
     </style>
 </head>
