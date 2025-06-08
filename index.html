@@ -89,11 +89,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Headline with Background Image</title>
+    <title>Responsive Moving Headline</title>
     <style>
         body {
             background: url('image/download 10.jpeg') no-repeat center center fixed; /* Add background image */
-            background-size: cover;
+            background-size: cover; /* Ensures the image covers the screen */
             overflow: hidden;
             margin: 0;
             padding: 0;
@@ -106,13 +106,13 @@
         
         .headline {
             white-space: nowrap;
-            font-size: 36px;
+            font-size: 2vw; /* Adjusts text size based on screen width */
             font-weight: bold;
             position: absolute;
             color: white;
             animation: move 15s linear infinite;
             background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            padding: 10px;
+            padding: 1vw; /* Adjusts padding dynamically */
         }
     </style>
 </head>
