@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,24 +112,24 @@
             document.getElementById("popup").style.display = "none";
         }
 
-       function redirectToWhatsApp(option) {
-    let userName = document.getElementById("userName").value.trim();
-    if (!userName) {
-        alert("Please enter your name.");
-        return;
-    }
-    
-    if (Object.keys(cart).length === 0) {
-        alert("Your cart is empty. Please add items before placing an order.");
-        return;
-    }
+        function redirectToWhatsApp(option) {
+            let userName = document.getElementById("userName").value.trim();
+            if (!userName) {
+                alert("Please enter your name.");
+                return;
+            }
+            
+            if (Object.keys(cart).length === 0) {
+                alert("Your cart is empty. Please add items before placing an order.");
+                return;
+            }
 
-    let message = `Hello, my name is ${userName}. I want to order:\n${Object.keys(cart).map(item => `${item} x${cart[item]}`).join("\n")}\nOption: ${option}`;
+            let message = `Hello, my name is ${userName}. I want to order:\n${Object.keys(cart).map(item => `${item} x${cart[item]}`).join("\n")}\nOption: ${option}`;
+            let whatsappURL = `https://wa.me/7679643925?text=${encodeURIComponent(message)}`;
 
-    let groupInviteLink = "https://chat.whatsapp.com/J2qCZiU0JK14Sd64NTjoQR"; // Replace with your actual group link
-
-    window.location.href = `${groupInviteLink}?text=${encodeURIComponent(message)}`;
-}
+            window.location.href = whatsappURL; // Redirect to WhatsApp
+ 
+        }
 
         function clearCart() {
             localStorage.removeItem("cart");
