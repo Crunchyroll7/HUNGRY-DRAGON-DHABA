@@ -92,7 +92,7 @@
     <title>Responsive Moving Headline</title>
     <style>
         body {
-            background: url('image/download 10.jpeg') no-repeat center center fixed; /* Add background image */
+            background: url('your-image-url.jpg') no-repeat center center fixed; /* Add background image */
             background-size: cover; /* Ensures the image covers the screen */
             overflow: hidden;
             margin: 0;
@@ -106,11 +106,11 @@
         
         .headline {
             white-space: nowrap;
-            font-size: 36px; /* Adjusts text size based on screen width */
+            font-size: clamp(36px, 4vw, 60px); /* Ensures font is at least 36px and scales up */
             font-weight: bold;
             position: absolute;
             color: white;
-            animation: move 15s linear infinite;
+            animation: move 5s linear infinite;
             background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
             padding: 1vw; /* Adjusts padding dynamically */
         }
