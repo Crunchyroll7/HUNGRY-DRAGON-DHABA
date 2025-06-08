@@ -89,11 +89,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Headline</title>
+    <title>Moving Headline with Background Image</title>
     <style>
         body {
-            background-color: red; /* Set the background color */
+            background: url('your-image-url.jpg') no-repeat center center fixed; /* Add background image */
+            background-size: cover;
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         @keyframes move {
@@ -108,6 +111,8 @@
             position: absolute;
             color: white;
             animation: move 5s linear infinite;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 10px;
         }
     </style>
 </head>
